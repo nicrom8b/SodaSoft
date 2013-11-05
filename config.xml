@@ -1,11 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>HelloWorld</name>
+<widget id="com.inso.sodasoft" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>SodaSoft</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Aplicación para la gestión de Soderia, desarrollado para la catedra de Ingenieria del Software 2
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="jorge.riera9@gmail.com" href="http://www.nigrobyte.com.ar/">
+        Team SodaSoft
+            Debora A Sudañez debicarp@gmail.com
+            Jorfe J Riera jorge.riera9@gmail.com
+            Diego Verrastro diegoxtr@gmail.com
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
     <preference name="permissions" value="none" />
