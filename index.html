@@ -1,42 +1,100 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
+<html lang="es">
+         <head>
+            <meta charset="utf-8">
+            <title>Soderia Santa Clara</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="">
+            <meta name="author" content="">
+            <!-- Le styles -->
+            <link href="css/bootstrap.css" rel="stylesheet">
+            <style type="text/css">
+              body {
+                  padding-top: 60px;
+                  padding-bottom: 40px;
+                    }
+                  .sidebar-nav {
+                  padding: 9px 0;
+                    }
+            </style>
+            <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  
+         </head>
+    
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                 <div class="span4"> <a class="brand" href="index.html">Soderia Santa Clara</a></div>
+                 <div class="span4"><p class="navbar-text pull-right">Jueves 19/09/2013 </p> </div>
+                <div class="span4"> <p class="navbar-text pull-right">Logged in as <a href="login.html" class="navbar-link">Username</a> </p></div>              
             </div>
         </div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="well sidebar-nav">
+                        <ul class="nav nav-list">
+                         <li class="nav-header" >Visitas</li>
+                         <li><a href="index.html" onclick="visitas_visitaDeHoy();"><i class="icon-home"></i>Visita de Hoy</a></li>
+                         <li class="nav-header">Clientes</li>
+                         <li><a href="#"> <i class="icon-user"> </i>Nuevo cliente</a></li>
+                         <li><a href="#"> <i class="icon-search"> </i>Buscar clientes</a></li>
+                         <li class="nav-header">Ventas</li>
+                         <li><a href="venta.html">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
+                         <li class="nav-header">Pagos</li>
+                         <li><a href="pago.html"> <i class="icon-heart"> </i>Relizar pagos</a></li>
+                         <li class="nav-header">Calendarios</li>
+                         <li><a href="calendario.html"><i class="icon-eye-open"> </i>Ver calendarios</a></li>
+                         <li><a href="nuevoCalendario.html"> <i class="icon-calendar"></i>Crear calendarios</a></li>
+                         <li class="nav-header">Informes</li>
+                         <li><a href="crearInforme.html"> <i class="icon-file"></i>Solicitar informes</a></li>
+                         <li class="active"> <a href="informeanterior.html"> <i class="icon-folder-close"></i>Informes anteriores</a></li>
+                         <li class="nav-header">Backups</li>
+                         <li><a href="backup.html"><i class="icon-th-list"></i>Listar backup</a></li>
+                         <li><a href="nuevoBackup.html"> <i class="icon-hdd"></i>Realizar backup</a></li>
+                        </ul>
+                    </div><!--/.well -->
+                </div><!--/span-->
+                
+                <div class="span9">
+                    <div class="hero-unit" id="divContenido">
+                        
+                    </div>
+
+                </div><!--/span-->
+      </div>
+ 
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+ 
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.10.1.min.js"></script> 
+   
+    
+    <script src="js/SodaSoft/businesslogic/visitasDeHoy.js"></script>
+    <script src="js/SodaSoft/businesslogic/detalleCliente.js"></script>
+    <script src="js/SodaSoft/connection/connection.js"></script>
+    <script src="js/SodaSoft/model/dao/clienteDAO.js"></script>
+
+    <!-- JS inicial de la app -->
+    <script type="text/javascript">
+      var db = window.openDatabase("SodaSoftDB", "1.0", "SodaSoftDB", 200000);
+      connection_createTable(visitas_visitaDeHoy, connection_error);
+
+      var divContenidoElement = $('#divContenido');
+     
+
+      
+    /*db.transaction(function(tx) {
+          tx.executeSql("DROP TABLE clientes", []);
+        });*/
+    </script>
     </body>
 </html>
