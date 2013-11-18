@@ -5,7 +5,7 @@ function detalleCliente(idCliente){
 }
 
 function pintarDetalleCliente(ts, result){
-	//alert(result.rows.item(0)['nombre']);
+	//alert(result.rows.item(0)['nomconexion a sqlite con javascript asincronabre']);
 	var clienteVo = result.rows.item(0);
 	var div = $('<div class="nav" align="center"></div>');
 	div.append($('<b>Cliente: '+clienteVo['apellido']+', '+clienteVo['nombre']+'</b>'));

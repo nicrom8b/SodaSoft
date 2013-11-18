@@ -3,7 +3,7 @@
 function connection_createTable(callbackOk, callbackError) { 
           db.transaction(function(tx) {
           tx.executeSql("CREATE TABLE IF NOT EXISTS clientes (id_cliente INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, apellido TEXT, id_barrio INTEGER NOT NULL, saldo TEXT, estado INTEGER, direccion TEXT);",
-      
+    
       [], callbackOk, callbackError);
 
         });

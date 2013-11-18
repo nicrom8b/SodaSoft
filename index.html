@@ -39,7 +39,7 @@
                          <li class="nav-header" >Visitas</li>
                          <li><a href="index.html" onclick="visitas_visitaDeHoy();"><i class="icon-home"></i>Visita de Hoy</a></li>
                          <li class="nav-header">Clientes</li>
-                         <li><a href="#"> <i class="icon-user"> </i>Nuevo cliente</a></li>
+                         <li><a href="#" onclick="formNuevoCliente();"> <i class="icon-user"> </i>Nuevo cliente</a></li>
                          <li><a href="#"> <i class="icon-search"> </i>Buscar clientes</a></li>
                          <li class="nav-header">Ventas</li>
                          <li><a href="venta.html">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
@@ -80,6 +80,7 @@
     
     <script src="js/SodaSoft/businesslogic/visitasDeHoy.js"></script>
     <script src="js/SodaSoft/businesslogic/detalleCliente.js"></script>
+    <script src="js/SodaSoft/businesslogic/nuevoCliente.js"></script>
     <script src="js/SodaSoft/connection/connection.js"></script>
     <script src="js/SodaSoft/model/dao/clienteDAO.js"></script>
 
@@ -87,6 +88,7 @@
     <script type="text/javascript">
       var db = window.openDatabase("SodaSoftDB", "1.0", "SodaSoftDB", 200000);
       connection_createTable(visitas_visitaDeHoy, connection_error);
+      
 
       var divContenidoElement = $('#divContenido');
      

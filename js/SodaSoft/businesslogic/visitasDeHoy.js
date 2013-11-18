@@ -4,10 +4,10 @@ function visitas_visitaDeHoy(){
 	legend.text('Calendario de Visitas - Sabado 15/10/2013');
 	divContenidoElement.append(legend);
 
-	//clienteDao_getAll(pintarTablaVisitasHoy, connection_error);
-	db.transaction(function(tx) {
-          tx.executeSql("INSERT INTO clientes (nombre, apellido, id_barrio, saldo, estado, direccion) VALUES (?, ?, ?, ?, ?, ?)", ["Jorge", "Riera", "1", "120.00","activo", "malvinas 123"], clienteDao_getAll(pintarTablaVisitasHoy), connection_error);
-        });
+	clienteDao_getAll(pintarTablaVisitasHoy, connection_error);
+//	db.transaction(function(tx) {
+  //        tx.executeSql("INSERT INTO clientes (nombre, apellido, id_barrio, saldo, estado, direccion) VALUES (?, ?, ?, ?, ?, ?)", ["Jorge", "Riera", "1", "120.00","activo", "malvinas 123"], clienteDao_getAll(pintarTablaVisitasHoy), connection_error);
+    //    });
 
 }
 
