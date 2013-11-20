@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Soderia Santa Clara</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ 
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="js/ingrid.js" type="text/javascript"></script>
+ 
+ 
+    <!-- Le styles -->
+ 
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/ingrid.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+ 
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+ 
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+ 
+    <script type="text/javascript">
+    $(document).ready(
+      function() {
+      $("#table1").ingrid({
+      url: 'remote.html',
+      height: 350
+       });
+     }
+    );
+</script>
+ 
+  </head>
+ 
+  <body>
+ 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+       
+          <div class="span4"> <a class="brand" href="index.html">Soderia Santa Clara</a></div>
+          <div class="span4"><p class="navbar-text pull-right">Viernes 23/06/2013  </p> </div>
+          <div class="span4"> <p class="navbar-text pull-right">Logged in as <a href="login.html" class="navbar-link">Username</a> </p></div>              
+      </div>
+    </div>
+ 
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Visitas</li>
+              <li ><a href="index.html">Vistia de Hoy</a></li>
+              <li class="nav-header">Clientes</li>
+              <li ><a href="#">Nuevo cliente</a></li>
+              <li><a href="#">Buscar clientes</a></li>
+              <li class="nav-header">Ventas</li>
+              <li><a href="#">Realizar ventas</a></li>
+              <li class="nav-header">Pagos</li>
+              <li><a href="#">Relizar pagos</a></li>
+              <li class="nav-header">Calendarios</li>
+              <li><a href="calendario.html">Ver calendarios</a></li>
+              <li><a href="nuevoCalendario.html">Crear calendarios</a></li>
+              <li class="nav-header">Informes</li>
+              <li class="active"><a href="crearInforme.html">Solicitar informes</a></li>
+              <li class="nav-header">Backups</li>
+              <li><a href="backup.html">Listar backup</a></li>
+              <li><a href="nuevoBackup.html">Realizar backup</a></li>
+           
+ 
+            </ul>
+           
+ 
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+           <legend>GENERAR INFORMES </legend>
+                      
+                 <form class="form-vertical">
+                   <fieldset>
+                      <div align="left">
+                        <label class="control-label" for="optionsCheckboxList"> <br> Seleccionar tipo de informe:</label>
+                           <div class="controls">
+                             <label class="checkbox">
+                               <input type="checkbox" name="optionsCheckboxList1" value="option1"> mensual
+                              </label>
+                             <label class="checkbox">
+                                <input type="checkbox" name="optionsCheckboxList2" value="option2"> semanal
+                              </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="optionsCheckboxList3" value="option3"> quincenal
+                            </label>
+                         </div>
+                      </div>
+ 
+                   </fieldset>
+                 </form>
+             
+ 
+           
+ 
+          <div align="center">
+            <a class="btn btn-primary" href="#">Aceptar</a>
+        </div>
+        </div>
+      </div><!--/span-->
+   
+ 
+     
+ 
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+ 
+    </div><!--/.fluid-container-->
+ 
+    <br />
+ 
+ 
+  </body>
+</html>

@@ -77,26 +77,47 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.10.1.min.js"></script> 
    
-    
-    <script src="js/SodaSoft/businesslogic/visitasDeHoy.js"></script>
-    <script src="js/SodaSoft/businesslogic/detalleCliente.js"></script>
-    <script src="js/SodaSoft/businesslogic/nuevoCliente.js"></script>
-    <script src="js/SodaSoft/connection/connection.js"></script>
-    <script src="js/SodaSoft/model/dao/clienteDAO.js"></script>
+    {#************************************ #}
+    <script src="js/sodaSoft/businesslogic/visitasDeHoy.js"></script>
+    <script src="js/sodaSoft/businesslogic/detalleCliente.js"></script>
+    <script src="js/sodaSoft/businesslogic/manager.js"></script>
+    <script src="js/sodaSoft/connection/connection.js"></script>
+    <script src="js/sodaSoft/model/dao/clienteDAO.js"></script>
+    <script src="js/sodaSoft/model/vo/clienteVO.js"></script>
+    <script src="js/sodaSoft/model/vo/estadoVO.js"></script>
+    <script src="js/sodaSoft/model/vo/estadoActivoVO.js"></script>
+    <script src="js/sodaSoft/model/vo/estadoInactivoVO.js"></script>
+    <script src="js/sodaSoft/model/vo/estadoMorosoVO.js"></script>
+    <script src="js/sodaSoft/model/vo/barrioVO.js"></script>
+    {#*************************************  #}
+
+    <script src="js/sodaSoft/pruebas/pruebas.js"></script>
 
     <!-- JS inicial de la app -->
     <script type="text/javascript">
-      var db = window.openDatabase("SodaSoftDB", "1.0", "SodaSoftDB", 200000);
-      connection_createTable(visitas_visitaDeHoy, connection_error);
-      
+     //  Constantes de la aplicacion
+      var ESTADO_MOROSO = 1;
+      var ESTADO_ACTIVO = 2;
+      var ESTADO_INACTIVO = 3;
+
+      var fechaHoy = new Date();
 
       var divContenidoElement = $('#divContenido');
-     
+      var db = window.openDatabase("SodaSoftDB2", "1.0", "SodaSoftDB", 200000);
 
+      connection_createTables(visitas_visitaDeHoy, connection_error);
+
+      visitas_visitaDeHoy();
+    
+
+     // Scripts para Base de datos inicial para pruebas => Descomentar en caso de querer cargar dicha prueba
+
+    // prueba_insertBarrios();
+    // prueba_insertCalendarios();
+    // prubea_insertCalBarrCLi();
+    // prueba_insertClientes();
       
-    /*db.transaction(function(tx) {
-          tx.executeSql("DROP TABLE clientes", []);
-        });*/
+    
     </script>
     </body>
 </html>

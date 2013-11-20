@@ -1,12 +1,12 @@
 function clienteDao_getAll(callbackOk, callbackError){
-  db.transaction(function(tx) {
+	db.transaction(function(tx) {
           tx.executeSql("select c.*, e.id_estado as id_estado_Testado, e.descripcion as descripcion_Testado from clientes c, estados e where e.id_estado = c.estado", [], callbackOk, callbackError);
         },
         function (){
-          alert('error');
+        	alert('error');
         },
         function (){
-          //alert('ok');
+        	//alert('ok');
         });
 }
 
@@ -44,7 +44,7 @@ function clienteDao_getByDiaTurno(dia, turno, callbackOk, callbackError){
 //                             )
 
 function clienteDao_getById(idCliente, callbackOk, callbackError){
-  db.transaction(function(tx) {
+	db.transaction(function(tx) {
           tx.executeSql("SELECT * FROM clientes WHERE id_cliente = ?", [idCliente], callbackOk, callbackError);
         }); 
 }
