@@ -1,6 +1,13 @@
 function clienteDao_getAll(callbackOk, callbackError){
   db.transaction(function(tx) {
-          tx.executeSql("select c.*, e.id_estado as id_estado_Testado, e.descripcion as descripcion_Testado from clientes c, estados e where e.id_estado = c.estado", [], callbackOk, callbackError);
+          tx.executeSql('select '
+                          +' c.*, '
+                          +' e.id_estado as id_estado_Testado, e.descripcion as descripcion_Testado '
+                          +' barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio '
+                        +' from '
+                          +' clientes c, estados e, barrios barr '
+                        +' where '
+                          +' e.id_estado = c.estado and c.id_barrio = barr.id_barrio', [], callbackOk, callbackError);
         },
         function (){
           alert('error');
@@ -47,6 +54,13 @@ function clienteDao_getByDiaTurno(dia, turno, callbackOk, callbackError){
 
 function clienteDao_getById(idCliente, callbackOk, callbackError){
   db.transaction(function(tx) {
-          tx.executeSql("SELECT * FROM clientes WHERE id_cliente = ?", [idCliente], callbackOk, callbackError);
+          tx.executeSql('select '
+                          +' c.*, '
+                          +' e.id_estado as id_estado_Testado, e.descripcion as descripcion_Testado, '
+                          +' barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio '
+                        +' from '
+                          +' clientes c, estados e, barrios barr '
+                        +' where '
+                          +' e.id_estado = c.estado and c.id_barrio = barr.id_barrio and c.id_cliente = ?', [idCliente], callbackOk, callbackError);
         }); 
 }

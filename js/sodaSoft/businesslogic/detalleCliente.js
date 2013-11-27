@@ -6,7 +6,7 @@ function detalleCliente(idCliente){
 
 function pintarDetalleCliente(ts, result){
 	//alert(result.rows.item(0)['nomconexion a sqlite con javascript asincronabre']);
-	var clienteVo = result.rows.item(0);
+	var clienteVo = manager_resultToClientes(result)[0];//result.rows.item(0);
 	var div = $('<div class="nav" align="center"></div>');
 	div.append($('<b>Cliente: '+clienteVo['apellido']+', '+clienteVo['nombre']+'</b>'));
 	divContenidoElement.append(div);
@@ -30,7 +30,7 @@ function pintarDetalleCliente(ts, result){
 	var bottonDiv= $('<div align="center"> </div>');
 	bottonDiv.append($('<a class="btn btn-primary" href="#"> Visitar</a>'));
 	bottonDiv.append($('<a class="btn btn-primary" href="#"> Vender</a>'));
-	bottonDiv.append($('<a class="btn btn-prymary" href="#"> Pago</a>'));
+	bottonDiv.append($('<a class="btn btn-prymary" onclick="pago('+clienteVo.idCliente+')" href="#"> Pago</a>'));
 	div.append(bottonDiv);
 
 	divContenidoElement.append(div);
