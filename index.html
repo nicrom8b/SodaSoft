@@ -37,23 +37,23 @@
                     <div class="well sidebar-nav">
                         <ul class="nav nav-list">
                          <li class="nav-header" >Visitas</li>
-                         <li><a href="index.html" onclick="visitas_visitaDeHoy();"><i class="icon-home"></i>Visita de Hoy</a></li>
+                         <li id="itemMenuVisitasHoy"><a href="index.html" onclick="visitas_visitaDeHoy();"><i class="icon-home"></i>Visita de Hoy</a></li>
                          <li class="nav-header">Clientes</li>
-                         <li><a href="#" onclick="formNuevoCliente();"> <i class="icon-user"> </i>Nuevo cliente</a></li>
-                         <li><a href="#"> <i class="icon-search"> </i>Buscar clientes</a></li>
+                         <li id="itemMenuNuevoCliente"><a href="#" onclick="formNuevoCliente();"> <i class="icon-user"> </i>Nuevo cliente</a></li>
+                         <li id="itemMenuBuscarClientes"><a href="#"> <i class="icon-search"> </i>Buscar clientes</a></li>
                          <li class="nav-header">Ventas</li>
-                         <li><a href="venta.html">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
+                         <li id="itemMenuRealizarVentas"><a href="venta.html">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
                          <li class="nav-header">Pagos</li>
-                         <li><a href="pago.html"> <i class="icon-heart"> </i>Relizar pagos</a></li>
+                         <li id="itemMenuRealizarPagos"><a href="pago.html"> <i class="icon-heart"> </i>Relizar pagos</a></li>
                          <li class="nav-header">Calendarios</li>
-                         <li><a href="calendario.html"><i class="icon-eye-open"> </i>Ver calendarios</a></li>
-                         <li><a href="nuevoCalendario.html"> <i class="icon-calendar"></i>Crear calendarios</a></li>
+                         <li id="itemMenuVerCalendarios"><a href="calendario.html"><i class="icon-eye-open"> </i>Ver calendarios</a></li>
+                         <li id="itemMenuCrearCalendarios"><a href="nuevoCalendario.html"> <i class="icon-calendar"></i>Crear calendarios</a></li>
                          <li class="nav-header">Informes</li>
-                         <li><a href="crearInforme.html"> <i class="icon-file"></i>Solicitar informes</a></li>
-                         <li class="active"> <a href="informeanterior.html"> <i class="icon-folder-close"></i>Informes anteriores</a></li>
+                         <li id="itemMenuSolicitarinformes"><a href="crearInforme.html"> <i class="icon-file"></i>Solicitar informes</a></li>
+                         <li id="itemMenuInformesAnteriores"> <a href="informeanterior.html"> <i class="icon-folder-close"></i>Informes anteriores</a></li>
                          <li class="nav-header">Backups</li>
-                         <li><a href="backup.html"><i class="icon-th-list"></i>Listar backup</a></li>
-                         <li><a href="nuevoBackup.html"> <i class="icon-hdd"></i>Realizar backup</a></li>
+                         <li id="itemMenuListarBackup"><a href="backup.html"><i class="icon-th-list"></i>Listar backup</a></li>
+                         <li id="itemMenuRealizarBackup"><a href="nuevoBackup.html"> <i class="icon-hdd"></i>Realizar backup</a></li>
                         </ul>
                     </div><!--/.well -->
                 </div><!--/span-->
@@ -105,18 +105,17 @@
       var divContenidoElement = $('#divContenido');
       var db = window.openDatabase("SodaSoftDB2", "1.0", "SodaSoftDB", 200000);
 
-      connection_createTables(visitas_visitaDeHoy, connection_error);
+      connection_createTables(null, connection_error);
 
       visitas_visitaDeHoy();
     
 
      // Scripts para Base de datos inicial para pruebas => Descomentar en caso de querer cargar dicha prueba
 
-    // prueba_insertBarrios();
-    // prueba_insertCalendarios();
-    // prubea_insertCalBarrCLi();
-    // prueba_insertClientes();
-      
+    //prueba_insertBarrios();
+    //prueba_insertCalendarios();
+    //prueba_insertCalBarrCLi();
+    //prueba_insertClientes();
     
     </script>
     </body>
