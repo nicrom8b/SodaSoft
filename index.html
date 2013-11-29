@@ -8,16 +8,9 @@
             <meta name="author" content="">
             <!-- Le styles -->
             <link href="css/bootstrap.css" rel="stylesheet">
-            <style type="text/css">
-              body {
-                  padding-top: 60px;
-                  padding-bottom: 40px;
-                    }
-                  .sidebar-nav {
-                  padding: 9px 0;
-                    }
-            </style>
             <link href="css/bootstrap-responsive.css" rel="stylesheet">
+            <link href="css/margenes.css" rel="stylesheet">
+            <link href="css/fieldset.css" rel="stylesheet">
   
          </head>
     
@@ -83,13 +76,16 @@
     <script src="js/sodaSoft/businesslogic/manager.js"></script>
     <script src="js/sodaSoft/connection/connection.js"></script>
     <script src="js/sodaSoft/model/dao/clienteDAO.js"></script>
+    <script src="js/sodaSoft/model/dao/sifonDAO.js"></script>
     <script src="js/sodaSoft/model/vo/clienteVO.js"></script>
+    <script src="js/sodaSoft/model/vo/sifonVO.js"></script>
     <script src="js/sodaSoft/model/vo/estadoVO.js"></script>
     <script src="js/sodaSoft/model/vo/estadoActivoVO.js"></script>
     <script src="js/sodaSoft/model/vo/estadoInactivoVO.js"></script>
     <script src="js/sodaSoft/model/vo/estadoMorosoVO.js"></script>
     <script src="js/sodaSoft/model/vo/barrioVO.js"></script>
     <script src="js/sodaSoft/businesslogic/pago.js"></script>
+    <script src="js/sodaSoft/businesslogic/venta.js"></script>
     {#*************************************  #}
 
     <script src="js/sodaSoft/pruebas/pruebas.js"></script>
@@ -101,6 +97,17 @@
       var ESTADO_ACTIVO = 2;
       var ESTADO_INACTIVO = 3;
 
+      var SIFON_TIPO_VIDRIO = 1;
+      var SIFON_VIDRIO_TXT = 'Sifon vidrio';
+      var SIFON_TIPO_PLASTICO = 2;
+      var SIFON_PLASTICO_TXT = 'Sifon plastico';
+      var SIFON_TIPO_MALLA = 3;
+      var SIFON_MALLA_TXT = 'Sifon con malla';
+      var TODOS = 4;
+      var TODOS_TXT = 'Todos';
+      var NINGUNO = 5;
+      var NINGUNO_TXT = 'Ninguno';
+
       var fechaHoy = new Date();
 
       var divContenidoElement = $('#divContenido');
@@ -109,7 +116,11 @@
       connection_createTables(null, connection_error);
 
       visitas_visitaDeHoy();
-    
+    /*ejecutar('drop table pruebas');
+    ejecutar('drop table pagos');
+    ejecutar('drop table detalle_ventas');
+    ejecutar('drop table ventas');
+    ejecutar('drop table sifones');*/
 
      // Scripts para Base de datos inicial para pruebas => Descomentar en caso de querer cargar dicha prueba
 
@@ -117,6 +128,7 @@
     //prueba_insertCalendarios();
     //prueba_insertCalBarrCLi();
     //prueba_insertClientes();
+
     
     </script>
     </body>

@@ -29,7 +29,7 @@ function pintarDetalleCliente(ts, result){
 
 	var bottonDiv= $('<div align="center"> </div>');
 	bottonDiv.append($('<a class="btn btn-primary" href="#"> Visitar</a>'));
-	bottonDiv.append($('<a class="btn btn-primary" href="#"> Vender</a>'));
+	bottonDiv.append($('<a class="btn btn-primary" onclick="venta('+clienteVo.idCliente+')" href="#"> Vender</a>'));
 	bottonDiv.append($('<a class="btn btn-prymary" onclick="pago('+clienteVo.idCliente+')" href="#"> Pago</a>'));
 	div.append(bottonDiv);
 

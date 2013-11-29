@@ -1,3 +1,64 @@
+function manager_vender(idCliente, sifonCantidad, fechaHoy){
+  var fechaHoyStr = manager_getFromatedDateYYYMMDD(fechaHoy);
+
+  db.transaction(function(tx) {
+        tx.executeSql('insert into ventas (id_cliente, fecha_vendido) VALUES (?, ?)',
+          [idCliente, fechaHoyStr], function(tx2, result){
+
+            for (var i = 0; i < sifonCantidad.length; i++) {
+              tx.executeSql('insert into detalle_ventas (id_venta, id_sifon, cantidad) VALUES (?, ?, ?)',
+                [result.insertId, sifonCantidad[i].id, sifonCantidad[i].cantidad], null, connection_error);
+            };
+            alert('vendido con exito!');
+            pago(idCliente);
+          }, connection_error);
+
+    });
+/*db.transaction(function(tx) {
+        tx.executeSql('insert into pruebas (descripcion, fecha) VALUES (?, ?)',
+          ['descrip', fechaHoyStr], function(tx2, result){
+              alert(result.insertId);
+          }, connection_error);
+    });*/
+}
+
+function insertDetalleVenta(){
+
+}
+
+function manager_getFromatedDateYYYMMDD(date){
+  var yyyy = date.getFullYear().toString();                                    
+  var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based         
+  var dd  = date.getDate().toString();             
+                            
+  return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+}
+
+function manager_resultToSifones(result){
+  var sifones = new Array();
+  var dataset = result.rows;
+
+  var unSifon;
+  var item;
+
+  for (var i = 0; i < dataset.length; i++) {
+      item = dataset.item(i);
+
+      unSifon = new SifonVO();
+      unSifon.idSifon = item.id_sifon;
+      unSifon.tipo = item.tipo;
+      unSifon.descripcion = item.descripcion;
+      unSifon.modelo = item.modelo;
+      unSifon.stock = item.stock;
+      unSifon.precio = item.precio;
+      unSifon.estado = item.estado;
+
+      sifones.push(unSifon);
+  }
+
+  return sifones;
+}
+
 function manager_cambiarSeleccionItemMenu(id){
   var seleccionado = $('.active');
 

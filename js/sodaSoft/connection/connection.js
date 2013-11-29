@@ -13,6 +13,17 @@ var insert_moroso_sql = 'INSERT OR REPLACE INTO estados (id_estado, descripcion)
 var insert_activo_sql = 'INSERT OR REPLACE INTO estados (id_estado, descripcion) VALUES (2, "Activo")';
 var insert_inactivo_sql = 'INSERT OR REPLACE INTO estados (id_estado, descripcion) VALUES (3, "Inactivo")';
 
+var createtable_sifones_sql ='CREATE TABLE IF NOT EXISTS sifones (id_sifon INTEGER PRIMARY KEY AUTOINCREMENT, tipo INTEGER, descripcion TEXT, modelo TEXT, stock INTEGER, precio REAL, estado TEXT)';
+var insert_vidrio_sql = 'INSERT OR REPLACE INTO sifones (id_sifon, tipo, descripcion, modelo, stock, precio, estado) VALUES (1, 1, "Vidrio", "barroco", 40, 2.5, "ok")';
+var insert_plasitco_sql = 'INSERT OR REPLACE INTO sifones (id_sifon, tipo, descripcion, modelo, stock, precio, estado) VALUES (2, 2, "Plastico", "renacimiento", 20, 3.6, "ok")';
+var insert_malla_sql = 'INSERT OR REPLACE INTO sifones (id_sifon, tipo, descripcion, modelo, stock, precio, estado) VALUES (3, 3, "Malla", "revolucion", 45, 2.3, "ok")';
+
+var createtable_ventas_sql ='CREATE TABLE IF NOT EXISTS ventas (id_venta INTEGER PRIMARY KEY AUTOINCREMENT, id_cliente INTEGER, fecha_vendido TEXT)';
+var createtable_detalleVentas_sql ='CREATE TABLE IF NOT EXISTS detalle_ventas (id_detalle_venta INTEGER PRIMARY KEY AUTOINCREMENT, id_venta INTEGER, id_sifon INTEGER, cantidad INTEGER)';
+var createtable_pagos_sql ='CREATE TABLE IF NOT EXISTS pagos (id_pago INTEGER PRIMARY KEY AUTOINCREMENT, id_venta INTEGER, monto REAL, fechaPago TEXT)';
+
+var createtable_pruebas_sql ='CREATE TABLE IF NOT EXISTS pruebas (id_prueba INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT, fecha TEXT)';
+
 function connection_createTables(callbackOk, callbackError) { 
 /*	var callbackOkInactivo = createTableClientes(callbackOk, callbackError);
 	var callbackOkActivo = insertEstadosInicialesInactivo(callbackOkInactivo, callbackError);
@@ -38,6 +49,17 @@ function connection_createTables(callbackOk, callbackError) {
   ejecutar(createtable_barrios_sql);
   ejecutar(createtable_calendarios_sql);
   ejecutar(createtable_calendarios_barrios_clientes_sql);
+
+  ejecutar(createtable_sifones_sql);
+  ejecutar(insert_vidrio_sql);
+  ejecutar(insert_plasitco_sql);
+  ejecutar(insert_malla_sql);
+
+  ejecutar(createtable_ventas_sql);
+  ejecutar(createtable_detalleVentas_sql);
+  ejecutar(createtable_pagos_sql);
+
+  ejecutar(createtable_pruebas_sql);
 
 }
 
