@@ -244,26 +244,30 @@ function pintarVenta(ts, result){
 }
 
 function vender(){
-	var idSifon = $('#cantidadVidrio').attr('idSifon');
-	var cantidad = $('#cantidadVidrio').val();
 
-	var sifonCantidad = new Array();
+	var sifonCantidadMonto = new Array();
 
 	if($('#cantidadVidrio').val() != 0){
-		sifonCantidad.push({'id' : $('#cantidadVidrio').attr('idSifon'), 'cantidad' : $('#cantidadVidrio').val()});	
+		sifonCantidadMonto.push({'id' : $('#cantidadVidrio').attr('idSifon'), 'cantidad' : $('#cantidadVidrio').val(), 'precio' : sifones[0].precio});	
 	}
 	if($('#cantidadPlastico').val() != 0){
-		sifonCantidad.push({'id' : $('#cantidadPlastico').attr('idSifon'), 'cantidad' :  $('#cantidadPlastico').val()})	
+		sifonCantidadMonto.push({'id' : $('#cantidadPlastico').attr('idSifon'), 'cantidad' :  $('#cantidadPlastico').val(), 'precio' : sifones[1].precio})	
 	}
 	if($('#cantidadMalla').val() != 0){
-		sifonCantidad.push({'id' : $('#cantidadMalla').attr('idSifon'), 'cantidad' :  $('#cantidadMalla').val()});
+		sifonCantidadMonto.push({'id' : $('#cantidadMalla').attr('idSifon'), 'cantidad' :  $('#cantidadMalla').val(), 'precio' : sifones[2].precio});
 	}
 	
-	if(sifonCantidad.length == 0){
+	if(sifonCantidadMonto.length == 0){
 		return false;
 	}
 
-	manager_vender(idCliente, sifonCantidad, fechaHoy);
+	var montoTotal = 0.0;
+
+	for (var i = 0; i < sifonCantidadMonto.length; i++) {
+		montoTotal += parseFloat(sifonCantidadMonto[i].precio) * parseInt(sifonCantidadMonto[i].cantidad);
+	};
+
+	manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaHoy);
 }
 
 function calcularSubTotal(cantidad, tipo, idLabelSubtotal){

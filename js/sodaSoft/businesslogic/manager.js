@@ -1,13 +1,13 @@
-function manager_vender(idCliente, sifonCantidad, fechaHoy){
+function manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaHoy){
   var fechaHoyStr = manager_getFromatedDateYYYMMDD(fechaHoy);
 
   db.transaction(function(tx) {
-        tx.executeSql('insert into ventas (id_cliente, fecha_vendido) VALUES (?, ?)',
-          [idCliente, fechaHoyStr], function(tx2, result){
+        tx.executeSql('insert into ventas (id_cliente, fecha_vendido, monto_total, cancelado) VALUES (?, ?, ?, ?)',
+          [idCliente, fechaHoyStr, montoTotal, 0], function(tx2, result){
 
-            for (var i = 0; i < sifonCantidad.length; i++) {
-              tx.executeSql('insert into detalle_ventas (id_venta, id_sifon, cantidad) VALUES (?, ?, ?)',
-                [result.insertId, sifonCantidad[i].id, sifonCantidad[i].cantidad], null, connection_error);
+            for (var i = 0; i < sifonCantidadMonto.length; i++) {
+              tx.executeSql('insert into detalle_ventas (id_venta, id_sifon, cantidad, monto) VALUES (?, ?, ?, ?)',
+                [result.insertId, sifonCantidadMonto[i].id, sifonCantidadMonto[i].cantidad, parseFloat(sifonCantidadMonto[i].precio) * parseInt(sifonCantidadMonto[i].cantidad)], null, connection_error);
             };
             alert('vendido con exito!');
             pago(idCliente);
