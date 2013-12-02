@@ -1,3 +1,10 @@
+function prueba_insertarDatosIniciales(){
+    prueba_insertBarrios();
+    prueba_insertCalendarios();
+    prueba_insertCalBarrCLi();
+    prueba_insertClientes();
+}
+
 function prueba_insertClientes(){
   db.transaction(function(tx) {
           tx.executeSql("INSERT INTO clientes (nombre, apellido, id_barrio, saldo, estado, direccion) VALUES (?, ?, ?, ?, ?, ?)", ["David", "Rearte", "2", "10.00","1", "malvsdsinas 1232"], null, connection_error);
