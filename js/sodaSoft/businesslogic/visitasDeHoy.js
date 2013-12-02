@@ -8,9 +8,13 @@ function visitas_visitaDeHoy(){
 
   //Se actualiza la fecha cada vez que se hace clic en visitas de hoy o se actualiza la pagina (en el index.html)
   fechaHoy = new Date();
-  //fechaHoy.setFullYear(2013,11,2);
+  fechaHoy.setFullYear(2013,11,3);
 
   //clienteDao_getAll(pintarTablaVisitasHoy, connection_error);
+  console.log(fechaHoy.toString('dd-MMM-yyyy'));
+  console.log(manager_getDiaSemanaString(fechaHoy.getDay()));
+  console.log(manager_getTurnoByFecha(fechaHoy));
+
   clienteDao_getByDiaTurno(manager_getDiaSemanaString(fechaHoy.getDay()), manager_getTurnoByFecha(fechaHoy), pintarTablaVisitasHoy, connection_error);
   /*db.transaction(function(tx) {
           tx.executeSql("INSERT INTO clientes (nombre, apellido, id_barrio, saldo, estado, direccion) VALUES (?, ?, ?, ?, ?, ?)", ["Jorge", "Riera", "1", "120.00","activo", "malvinas 123"], clienteDao_getAll(pintarTablaVisitasHoy), connection_error);

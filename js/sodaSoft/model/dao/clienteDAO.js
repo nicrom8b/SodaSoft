@@ -18,8 +18,6 @@ function clienteDao_getAll(callbackOk, callbackError){
 }
 
 function clienteDao_getByDiaTurno(dia, turno, callbackOk, callbackError){
-  console.log(dia);
-  console.log(turno);
     db.transaction(function(tx) {
           tx.executeSql('select '
                              +' cli.*, '
