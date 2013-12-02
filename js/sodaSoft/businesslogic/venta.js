@@ -233,7 +233,7 @@ function pintarVenta(ts, result){
 +'</div>'
 
 +'<div  align="center">'
-+'<button id="btnVender" class="btn btn-primary" onclick="vender();" disabled="disabled">'
++'<button type="button" id="btnVender" class="btn btn-primary" onclick="vender();" disabled="disabled">'
   +'Vender'
 +'</button>'
 +'</div>'

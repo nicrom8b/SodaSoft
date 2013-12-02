@@ -8,6 +8,7 @@ function visitas_visitaDeHoy(){
 
   //Se actualiza la fecha cada vez que se hace clic en visitas de hoy o se actualiza la pagina (en el index.html)
   fechaHoy = new Date();
+  fechaHoy.setFullYear(2013,10,2);
   //clienteDao_getAll(pintarTablaVisitasHoy, connection_error);
   clienteDao_getByDiaTurno(manager_getDiaSemanaString(fechaHoy.getDay()), manager_getTurnoByFecha(fechaHoy), pintarTablaVisitasHoy, connection_error);
   /*db.transaction(function(tx) {
