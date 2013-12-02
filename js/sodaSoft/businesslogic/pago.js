@@ -1,7 +1,15 @@
-function pago(idCliente){
+var idCliente;
+var montoTotalCuenta;
+var ventas;
+
+function pago(idClienteParam){
+	idCliente = idClienteParam;
+	montoTotalCuenta = 0.0;
+	ventas = undefined;
+
 	divContenidoElement.children().remove();
 
-	clienteDao_getById(idCliente, pintarPago, connection_error);
+	clienteDao_getById(idClienteParam, pintarPago, connection_error);
 }
 
 function pintarPago(ts, result){
@@ -71,19 +79,9 @@ function pintarPago(ts, result){
 							+'<th>SubTotal</th>'
 						+'</tr>'
 					+'</thead>'
-					+'<tbody>'
+					+'<tbody id="tbdoyVentas">'
 						+'<tr class="info">'
-							+'<td>a</td>'
-							+'<td><label id="vidrio_label_subtotal">0.0</label></td>'
-						+'</tr>'
-						+'<tr class="info">'
-							+'<td>b</td>'
-							+'<td><label id="plastico_label_subtotal">0.0</label></td>'
-						+'</tr>'
-						+'<tr class="info">'
-							+'<td>c</td>'
-							+'<td><label id="malla_label_subtotal">0.0</label></td>'
-						+'</tr>'
+							+'<td colspan="2">Sin resultados</td>'
 					+'</tbody>'
                   +'</table>'
 
@@ -93,17 +91,70 @@ function pintarPago(ts, result){
   +'<label class="span3"><p><strong> Monto a total</strong> </p></label>'
   +'<div class="span4 input-prepend input-append ">'
     +'<span class="add-on">$</span>'
-      +'<input class="span4" id="montoTotal" type="text" value="0.0" readonly>'
+      +'<input class="span4" id="montoApagar" type="text" value="0.0" onchange="verificar();">'
   +'</div>'
 +'</div>'
 
 +'<div  align="center">'
-+'<button type="button" id="btnVender" class="btn btn-primary" onclick="vender();" disabled="disabled">'
-  +'Vender'
++'<button type="button" id="btnPagar" class="btn btn-primary" onclick="pagar();">'
+  +'Pagar'
 +'</button>'
 +'</div>'
  +'           </fieldset>'
           +'</form>'
 	 );
 
+	venta_getAllByCliente(idCliente, cargarDatos, connection_error);
+}
+
+function cargarDatos(tx, result){
+	ventas = manager_resultToVentas(result);
+	var tbody = $('#tbdoyVentas');
+	var tr;
+
+	if(ventas.length == 0){
+		/*tr = $('<tr class="info" colspan="2">'
+			+'<td>Sin resultados</td>'
+			+'</tr>');*/
+
+		return false;
+	}
+
+	tbody.children().remove();
+
+/*alert(ventas[0].fechaVendido);
+alert(temp);
+alert(fechaUtils_format(temp, '/,dd-mm-yyyy'));*/
+var temp = new Date();
+
+	for (var i = 0; i < ventas.length; i++) {
+		console.log(ventas[i].fechaVendido);
+
+		var fechaStr = ventas[i].fechaVendido.split('-');
+		temp.setFullYear(fechaStr[0],parseInt(fechaStr[1]) - 1, fechaStr[2]);
+
+		tr = $('<tr class="info">'
+			+'<td>'+fechaUtils_format(temp, '/,dd-mm-yyyy')+'</td>'
+			+'<td>$ 	'+ventas[i].montoTotal.toFixed(2)+'</td>'
+			+'</tr>');
+		tbody.append(tr);
+
+		montoTotalCuenta += ventas[i].montoTotal;
+	};
+
+	$('#montoApagar').val(montoTotalCuenta.toFixed(2));
+}
+
+function verificar(){
+	if($('#montoApagar').val() == 0 || $('#montoApagar').val() > montoTotalCuenta){
+		$('#btnPagar').prop('disabled', true);
+		alert('El monto a pagar no puede ser cero o mayor al total.');
+	}else{
+		$('#btnPagar').prop('disabled', false);
+	}
+}
+
+function pagar(){
+	ventas[0].idVenta;
+	manager_pagar(ventas, $('#montoApagar').val(), fechaHoy, idCliente);//cuidado aca con fechaHoy
 }

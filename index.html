@@ -89,6 +89,9 @@
     <script src="js/sodaSoft/model/vo/barrioVO.js"></script>
     <script src="js/sodaSoft/businesslogic/pago.js"></script>
     <script src="js/sodaSoft/businesslogic/venta.js"></script>
+    <script src="js/sodaSoft/model/dao/ventaDAO.js"></script>
+    <script src="js/sodaSoft/model/vo/ventaVO.js"></script>
+    <script src="js/sodaSoft/utils/fechaUtils.js"></script>
    
 <!-- ************************************ -->
     <script src="js/sodaSoft/pruebas/pruebas.js"></script>
@@ -119,6 +122,8 @@
       connection_createTables(null, connection_error);
 
       visitas_visitaDeHoy();
+
+
     /*ejecutar('drop table pruebas');
     ejecutar('drop table pagos');
     ejecutar('drop table detalle_ventas');

@@ -8,7 +8,7 @@ function visitas_visitaDeHoy(){
 
   //Se actualiza la fecha cada vez que se hace clic en visitas de hoy o se actualiza la pagina (en el index.html)
   fechaHoy = new Date();
-  fechaHoy.setFullYear(2013,11,3);
+  fechaHoy.setFullYear(2013,11,10);
 
   //clienteDao_getAll(pintarTablaVisitasHoy, connection_error);
   console.log(fechaHoy.toString('dd-MMM-yyyy'));

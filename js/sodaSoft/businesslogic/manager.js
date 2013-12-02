@@ -1,9 +1,92 @@
-function manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaHoy){
-  var fechaHoyStr = manager_getFromatedDateYYYMMDD(fechaHoy);
+/*function manager_pagar(ventasVo, montoRecibido, fechaPago, idCliente, i){
+  var fechaStr = manager_getFromatedDateYYYMMDD(fechaPago);
+
+  db.transaction(function(tx) {
+          var saldo = 1;
+          //var i = 0;
+          var cancelado = 0;
+
+          if(saldo <= 0){
+            return false;
+          }
+
+              var unaVentaVo = ventasVo[i];
+              saldo = parseFloat(montoRecibido - unaVentaVo.montoTotal).toFixed(2);
+              cancelado = saldo >= 0 ? 1 : 0;
+
+              var montoPagado = cancelado == 1 ? unaVentaVo.montoTotal : montoRecibido;
+              var saldoDeuda = parseFloat(unaVentaVo.montoTotal - montoPagado).toFixed(2);
+              
+              tx.executeSql('insert into pagos (id_venta, monto, fecha_pago) values (?, ?, ?) ', [unaVentaVo.idVenta, montoPagado, fechaStr], function(tx2, result){
+                tx.executeSql('update ventas set monto_total = ?, cancelado = ? ', [saldoDeuda, cancelado], manager_pagar(ventasVo, saldo, fechaPago, idCliente, i+1), connection_error);
+              }, connection_error);
+              
+
+              //i+=1;
+              //montoRecibido = saldo;
+            }
+          alert('Pagado con éxito!');
+          pago(idCliente);
+        });
+}*/
+
+
+function manager_pagar(ventasVo, montoRecibido, fechaPago, idCliente){
+  var fechaStr = manager_getFromatedDateYYYMMDD(fechaPago);
+
+  db.transaction(function(tx) {
+          var saldo = 1;
+          var i = 0;
+          var cancelado = 0;
+
+          while(saldo > 0){
+              var unaVentaVo = ventasVo[i];
+              saldo = parseFloat(montoRecibido - unaVentaVo.montoTotal).toFixed(2);
+              cancelado = saldo >= 0 ? 1 : 0;
+
+              var montoPagado = cancelado == 1 ? unaVentaVo.montoTotal : montoRecibido;
+              var saldoDeuda = parseFloat(unaVentaVo.montoTotal - montoPagado).toFixed(2);
+              
+              tx.executeSql('insert into pagos (id_venta, monto, fecha_pago) values (?, ?, ?) ', [unaVentaVo.idVenta, montoPagado, fechaStr], null, connection_error);
+              tx.executeSql('update ventas set monto_total = ?, cancelado = ? where id_venta = ?', [saldoDeuda, cancelado, unaVentaVo.idVenta], null, connection_error);
+
+              i+=1;
+              montoRecibido = saldo;
+            }
+          alert('Pagado con éxito!');
+          pago(idCliente);
+        });
+}
+
+function manager_resultToVentas(result){
+  var ventas = new Array();
+  var dataset = result.rows;
+
+  var unaVenta;
+  var item;
+
+  for (var i = 0; i < dataset.length; i++) {
+      item = dataset.item(i);
+
+      unaVenta = new VentaVO();
+      unaVenta.idVenta = item.id_venta;
+      unaVenta.idCliente = item.id_cliente;
+      unaVenta.fechaVendido = item.fecha_vendido;
+      unaVenta.montoTotal = item.monto_total;
+      unaVenta.cancelado = item.cancelado;
+
+      ventas.push(unaVenta);
+  }
+
+  return ventas;
+}
+
+function manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaVenta){
+  var fechaStr = manager_getFromatedDateYYYMMDD(fechaVenta);
 
   db.transaction(function(tx) {
         tx.executeSql('insert into ventas (id_cliente, fecha_vendido, monto_total, cancelado) VALUES (?, ?, ?, ?)',
-          [idCliente, fechaHoyStr, montoTotal, 0], function(tx2, result){
+          [idCliente, fechaStr, montoTotal, 0], function(tx2, result){
 
             for (var i = 0; i < sifonCantidadMonto.length; i++) {
               tx.executeSql('insert into detalle_ventas (id_venta, id_sifon, cantidad, monto) VALUES (?, ?, ?, ?)',

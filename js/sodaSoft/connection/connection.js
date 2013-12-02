@@ -20,7 +20,7 @@ var insert_malla_sql = 'INSERT OR REPLACE INTO sifones (id_sifon, tipo, descripc
 
 var createtable_ventas_sql ='CREATE TABLE IF NOT EXISTS ventas (id_venta INTEGER PRIMARY KEY AUTOINCREMENT, id_cliente INTEGER, fecha_vendido TEXT, monto_total REAL, cancelado INTEGER)';
 var createtable_detalleVentas_sql ='CREATE TABLE IF NOT EXISTS detalle_ventas (id_detalle_venta INTEGER PRIMARY KEY AUTOINCREMENT, id_venta INTEGER, id_sifon INTEGER, cantidad INTEGER, monto REAL)';
-var createtable_pagos_sql ='CREATE TABLE IF NOT EXISTS pagos (id_pago INTEGER PRIMARY KEY AUTOINCREMENT, id_venta INTEGER, monto REAL, fechaPago TEXT)';
+var createtable_pagos_sql ='CREATE TABLE IF NOT EXISTS pagos (id_pago INTEGER PRIMARY KEY AUTOINCREMENT, id_venta INTEGER, monto REAL, fecha_pago TEXT)';
 
 var createtable_pruebas_sql ='CREATE TABLE IF NOT EXISTS pruebas (id_prueba INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT, fecha TEXT)';
 
