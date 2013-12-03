@@ -32,7 +32,7 @@
                          <li class="nav-header" >Visitas</li>
                          <li id="itemMenuVisitasHoy"><a href="index.html" onclick="visitas_visitaDeHoy();"><i class="icon-home"></i>Visita de Hoy</a></li>
                          <li class="nav-header">Clientes</li>
-                         <li id="itemMenuNuevoCliente"><a href="#" onclick="formNuevoCliente();"> <i class="icon-user"> </i>Nuevo cliente</a></li>
+                         <li id="itemMenuNuevoCliente"><a href="#" onclick="nuevoCliente();"> <i class="icon-user"> </i>Nuevo cliente</a></li>
                          <li id="itemMenuBuscarClientes"><a href="#"> <i class="icon-search"> </i>Buscar clientes</a></li>
                          <li class="nav-header">Ventas</li>
                          <li id="itemMenuRealizarVentas"><a href="venta.html">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
@@ -77,9 +77,12 @@
     <script src="js/sodaSoft/businesslogic/visitasDeHoy.js"></script>
     <script src="js/sodaSoft/businesslogic/detalleCliente.js"></script>
     <script src="js/sodaSoft/businesslogic/manager.js"></script>
+    <script src="js/sodaSoft/businesslogic/nuevoCliente.js"></script>
     <script src="js/sodaSoft/connection/connection.js"></script>
     <script src="js/sodaSoft/model/dao/clienteDAO.js"></script>
     <script src="js/sodaSoft/model/dao/sifonDAO.js"></script>
+    <script src="js/sodaSoft/model/dao/recorridoDAO.js"></script>
+    <script src="js/sodaSoft/model/dao/barrioDAO.js"></script>
     <script src="js/sodaSoft/model/vo/clienteVO.js"></script>
     <script src="js/sodaSoft/model/vo/sifonVO.js"></script>
     <script src="js/sodaSoft/model/vo/estadoVO.js"></script>
@@ -87,11 +90,15 @@
     <script src="js/sodaSoft/model/vo/estadoInactivoVO.js"></script>
     <script src="js/sodaSoft/model/vo/estadoMorosoVO.js"></script>
     <script src="js/sodaSoft/model/vo/barrioVO.js"></script>
+    <script src="js/sodaSoft/model/vo/calendarioVO.js"></script>
+    <script src="js/sodaSoft/model/vo/recorridoVO.js"></script>
     <script src="js/sodaSoft/businesslogic/pago.js"></script>
     <script src="js/sodaSoft/businesslogic/venta.js"></script>
     <script src="js/sodaSoft/model/dao/ventaDAO.js"></script>
     <script src="js/sodaSoft/model/vo/ventaVO.js"></script>
     <script src="js/sodaSoft/utils/fechaUtils.js"></script>
+
+
    
 <!-- ************************************ -->
     <script src="js/sodaSoft/pruebas/pruebas.js"></script>

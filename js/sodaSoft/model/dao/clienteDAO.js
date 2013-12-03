@@ -62,3 +62,11 @@ function clienteDao_getById(idCliente, callbackOk, callbackError){
                           +' e.id_estado = c.estado and c.id_barrio = barr.id_barrio and c.id_cliente = ?', [idCliente], callbackOk, callbackError);
         }); 
 }
+
+function clienteDao_save (nombre, apellido, direccion, barrio, callbackOk, callbackError){
+  db.transaction(function(tx){
+          tx.executeSql('INSERT INTO clientes (nombre, apellido, id_barrio, saldo , estado, direccion) VALUES'
+            +'(?,?,?,?,?,?)',[nombre, apellido, barrio, 0,2,direccion], callbackOk, callbackError);
+
+  });
+  }

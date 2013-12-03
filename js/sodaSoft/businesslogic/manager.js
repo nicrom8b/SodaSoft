@@ -283,3 +283,69 @@ function manager_getTurnoByFecha(fecha){
 
   return 'Tarde';
 }
+
+function manager_resultToBarrios(result){
+    var barrios= new Array();
+    var dataset=result.rows;
+
+    var unBarrio;
+    var item;
+
+    for (var i=0; i<dataset.length; i++){
+      item = dataset.item(i);
+      
+      unBarrio=new BarrioVO();
+      unBarrio.idBarrio=item.id_barrio;
+      unBarrio.nombre=item.nombre;
+      unBarrio.descripcion=item.descripcion;
+
+      barrios.push(unBarrio);
+    }
+  return barrios;
+}
+
+function manager_resultToRecorridos(result){
+
+
+    var recorridos= new Array();
+    var dataset=result.rows;
+    console.log("result: " +result);
+
+    var unRecorrido;
+    var item;
+
+    for (var i=0; i<dataset.length; i++){
+      item = dataset.item(i);
+      
+      unRecorrido=new RecorridoVO();
+      unRecorrido.idRecorrido=item.id_recorrido;
+      unRecorrido.idBarrio=item.id_barrio;
+      unRecorrido.idCalendario=item.id_calendario;
+      recorridos.push(unRecorrido);
+
+    }
+  return recorridos;
+
+}
+
+function manager_resultToCalendarios(result){
+    var calendarios= new Array();
+    var dataset=result.rows;
+
+    var unCalendario;
+    var item;
+
+    for (var i=0; i<dataset.length; i++){
+      item = dataset.item(i);
+      
+      unCalendario=new CalendarioVO();
+      unCalendario.idCalendario=item.c_id_calendario;
+      unCalendario.dia=item.dia;
+      unCalendario.turno=item.turno;
+      calendarios.push(unCalendario);
+
+    }
+
+  return calendarios;
+
+}
