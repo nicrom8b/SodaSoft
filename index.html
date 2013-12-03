@@ -33,16 +33,16 @@
                          <li id="itemMenuVisitasHoy"><a href="index.html" onclick="visitas_visitaDeHoy();"><i class="icon-home"></i>Visita de Hoy</a></li>
                          <li class="nav-header">Clientes</li>
                          <li id="itemMenuNuevoCliente"><a href="#" onclick="nuevoCliente();"> <i class="icon-user"> </i>Nuevo cliente</a></li>
-                         <li id="itemMenuBuscarClientes"><a href="#"> <i class="icon-search"> </i>Buscar clientes</a></li>
+                         <li id="itemMenuBuscarClientes"><a href="#" > <i class="icon-search"> </i>Buscar clientes</a></li>
                          <li class="nav-header">Ventas</li>
-                         <li id="itemMenuRealizarVentas"><a href="venta.html">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
+                         <li id="itemMenuRealizarVentas"><a href="#" onclick="realizarVenta();">  <i class="icon-shopping-cart"></i>Realizar ventas</a> </li>
                          <li class="nav-header">Pagos</li>
-                         <li id="itemMenuRealizarPagos"><a href="pago.html"> <i class="icon-heart"> </i>Relizar pagos</a></li>
+                         <li id="itemMenuRealizarPagos"><a href="#" onclick="realizarPago();"> <i class="icon-heart"> </i>Relizar pagos</a></li>
                          <li class="nav-header">Calendarios</li>
-                         <li id="itemMenuVerCalendarios"><a href="calendario.html"><i class="icon-eye-open"> </i>Ver calendarios</a></li>
-                         <li id="itemMenuCrearCalendarios"><a href="nuevoCalendario.html"> <i class="icon-calendar"></i>Crear calendarios</a></li>
+                         <li id="itemMenuVerCalendarios"><a href="#" onclick="verCalendario();"><i class="icon-eye-open"> </i>Ver calendarios</a></li>
+                         <li id="itemMenuCrearCalendarios"><a href="#" onclick="crearCalendario();"> <i class="icon-calendar"></i>Crear calendarios</a></li>
                          <li class="nav-header">Informes</li>
-                         <li id="itemMenuSolicitarinformes"><a href="crearInforme.html"> <i class="icon-file"></i>Solicitar informes</a></li>
+                         <li id="itemMenuSolicitarinformes"><a href="#" onclick="solicitarInforme();"> <i class="icon-file"></i>Solicitar informes</a></li>
                          <li id="itemMenuInformesAnteriores"> <a href="informeanterior.html"> <i class="icon-folder-close"></i>Informes anteriores</a></li>
                          <li class="nav-header">Backups</li>
                          <li id="itemMenuListarBackup"><a href="backup.html"><i class="icon-th-list"></i>Listar backup</a></li>
@@ -78,6 +78,12 @@
     <script src="js/sodaSoft/businesslogic/detalleCliente.js"></script>
     <script src="js/sodaSoft/businesslogic/manager.js"></script>
     <script src="js/sodaSoft/businesslogic/nuevoCliente.js"></script>
+    <script src="js/sodaSoft/businesslogic/crearCalendario.js"></script>
+    <script src="js/sodaSoft/businesslogic/realizarPago.js"></script>
+    <script src="js/sodaSoft/businesslogic/realizarVenta.js"></script>
+    <script src="js/sodaSoft/businesslogic/solicitarInforme.js"></script>
+    <script src="js/sodaSoft/businesslogic/verCalendario.js"></script>
+
     <script src="js/sodaSoft/connection/connection.js"></script>
     <script src="js/sodaSoft/model/dao/clienteDAO.js"></script>
     <script src="js/sodaSoft/model/dao/sifonDAO.js"></script>
