@@ -1,8 +1,10 @@
 var sifones;
 var idCliente;
+var clienteVo;
 
 function venta(idClienteParam){
 	idCliente = idClienteParam;
+	var clienteVo = undefined;
 
 	divContenidoElement.children().remove();
 
@@ -23,7 +25,7 @@ function pintarVenta(ts, result){
 		return;
 	}
 
-	var clienteVo = clientesVo[0];
+	clienteVo = clientesVo[0];
 
 	/*var form = $('<form class="form-horizontal"></form>');
 	var fieldset = $('<fieldset></fieldset>');
@@ -206,18 +208,18 @@ function pintarVenta(ts, result){
 					+'<tbody>'
 						+'<tr class="info">'
 							+'<td>'+sifones[0].descripcion+'</td>'
-							+'<td><input id="cantidadVidrio" idSifon="'+sifones[0].idSifon+'" type="number" value="0" onchange="calcularSubTotal(this.value, '+SIFON_TIPO_VIDRIO+', \'vidrio_label_subtotal\');"></td>'
-							+'<td><label id="vidrio_label_subtotal">0.0</label></td>'
+							+'<td><input id="cantidadVidrio" idSifon="'+sifones[0].idSifon+'" type="number" value="0" onchange="calcularSubTotal(this.value, '+SIFON_TIPO_VIDRIO+', \'vidrio_label_subtotal\', \'cantidadVidrio\');"></td>'
+							+'<td><label id="vidrio_label_subtotal">0.00</label></td>'
 						+'</tr>'
 						+'<tr class="info">'
 							+'<td>'+sifones[1].descripcion+'</td>'
-							+'<td><input id="cantidadPlastico" idSifon="'+sifones[1].idSifon+'" type="number" value="0" onchange="calcularSubTotal(this.value, '+SIFON_TIPO_PLASTICO+', \'plastico_label_subtotal\');"></td>'
-							+'<td><label id="plastico_label_subtotal">0.0</label></td>'
+							+'<td><input id="cantidadPlastico" idSifon="'+sifones[1].idSifon+'" type="number" value="0" onchange="calcularSubTotal(this.value, '+SIFON_TIPO_PLASTICO+', \'plastico_label_subtotal\', \'cantidadPlastico\');"></td>'
+							+'<td><label id="plastico_label_subtotal">0.00</label></td>'
 						+'</tr>'
 						+'<tr class="info">'
 							+'<td>'+sifones[2].descripcion+'</td>'
-							+'<td><input id="cantidadMalla" idSifon="'+sifones[2].idSifon+'" type="number" value="0" onchange="calcularSubTotal(this.value, '+SIFON_TIPO_MALLA+', \'malla_label_subtotal\');"></td>'
-							+'<td><label id="malla_label_subtotal">0.0</label></td>'
+							+'<td><input id="cantidadMalla" idSifon="'+sifones[2].idSifon+'" type="number" value="0" onchange="calcularSubTotal(this.value, '+SIFON_TIPO_MALLA+', \'malla_label_subtotal\', \'cantidadMalla\');"></td>'
+							+'<td><label id="malla_label_subtotal">0.00</label></td>'
 						+'</tr>'
 					+'</tbody>'
                   +'</table>'
@@ -267,10 +269,22 @@ function vender(){
 		montoTotal += parseFloat(sifonCantidadMonto[i].precio) * parseInt(sifonCantidadMonto[i].cantidad);
 	};
 
-	manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaHoy);
+	manager_vender(clienteVo, sifonCantidadMonto, montoTotal, fechaHoy);
 }
 
-function calcularSubTotal(cantidad, tipo, idLabelSubtotal){
+function calcularSubTotal(cantidad, tipo, idLabelSubtotal, idElemento){
+	if($('#'+idElemento).val() == '' || $('#'+idElemento).val() == undefined || $('#'+idElemento).val() == null){
+		$('#'+idElemento).val(0);
+	}
+
+	if($('#'+idElemento).val() < 0 || isNaN($('#'+idElemento).val()*2) || ($('#'+idElemento).val()+'').indexOf('.') != -1){
+		alert('Una cantidad no puede ser menor o igual a cero y debe ser un número.');
+		$('#btnVender').prop('disabled', true);
+		return false;
+	}else{
+		$('#btnVender').prop('disabled', false);
+	}
+
 	var precioSifon = 0.0;
 
 	for (var i = 0; i < sifones.length; i++) {
@@ -289,6 +303,7 @@ function calcularSubTotal(cantidad, tipo, idLabelSubtotal){
 
 	if($('#montoTotal').val() <= 0){
 		$('#btnVender').prop('disabled', true);
+		return false;
 	}else{
 		$('#btnVender').prop('disabled', false);
 	}

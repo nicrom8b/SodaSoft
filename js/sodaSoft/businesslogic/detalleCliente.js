@@ -52,7 +52,7 @@ function pintarDetalleCliente(tx, result){
 
 	//divContenidoElement.append(div);
 	divContenidoElement.append('<div class="nav" align="center">'
-              +'<b> Cliente: Riera, Jorge Justino </b>'
+              +'<b> Cliente: '+clienteVo.getApellidoComaEspacioNombre()+' </b>'
  
                 +'</div>'
                 +'<div align="rigth">'
@@ -84,11 +84,18 @@ function pintarDetalleCliente(tx, result){
                         +'</form>'
           +'</div>'
           +'<div align="center">'
-            +'<button class="btn btn-primary" href="#">Visitar</button>'
+            +'<button id="btnvisitar" class="btn btn-primary" onclick="manager_visitar('+clienteVo.idCliente+', fechaHoy, visitas_visitaDeHoy)" href="#">Visitar</button>'
+            +'&nbsp;'
             +'<button class="btn btn-warning" onclick="venta('+clienteVo.idCliente+')" href="#">Vender</button>'
+            +'&nbsp;'
             +'<button id="btnCobro" class="btn btn-success" onclick="pago('+clienteVo.idCliente+')" href="#">Cobrar</button>'
           +'</div>');
+
 	
+	if(clienteVo.visitado){
+		$('#btnvisitar').prop('disabled', true);
+	}
+
 	$('#inputSaldo').val(saldo == 0 ? '0.0' : saldo);
 
 	if(saldo == 0){

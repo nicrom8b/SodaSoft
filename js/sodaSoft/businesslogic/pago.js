@@ -1,11 +1,13 @@
 var idCliente;
 var montoTotalCuenta;
 var ventas;
+var clienteVo;
 
 function pago(idClienteParam){
 	idCliente = idClienteParam;
 	montoTotalCuenta = 0.0;
 	ventas = undefined;
+	clienteVo = undefined;
 
 	divContenidoElement.children().remove();
 
@@ -18,7 +20,7 @@ function pintarPago(ts, result){
 		return;
 	}
 
-	var clienteVo = clientesVo[0];
+	clienteVo = clientesVo[0];
 
 	/*var form = $('<form class="form-horizontal"></form>');
 	var fieldset = $('<fieldset></fieldset>');
@@ -81,7 +83,7 @@ function pintarPago(ts, result){
 					+'</thead>'
 					+'<tbody id="tbdoyVentas">'
 						+'<tr class="info">'
-							+'<td colspan="2">Sin resultados</td>'
+							+'<td colspan="2"><center>Sin resultados</center></td>'
 					+'</tbody>'
                   +'</table>'
 
@@ -91,7 +93,7 @@ function pintarPago(ts, result){
   +'<label class="span3"><p><strong> Monto a total</strong> </p></label>'
   +'<div class="span4 input-prepend input-append ">'
     +'<span class="add-on">$</span>'
-      +'<input class="span4" id="montoApagar" type="text" value="0.0" onchange="verificar();">'
+      +'<input class="span4" id="montoApagar" type="number" value="0.0" onchange="verificar();" maxlength="4">'
   +'</div>'
 +'</div>'
 
@@ -99,6 +101,8 @@ function pintarPago(ts, result){
 +'<button type="button" id="btnPagar" class="btn btn-primary" onclick="pagar();">'
   +'Cobrar'
 +'</button>'
++'&nbsp;&nbsp;'
++'<button type="button" id="btnAtras" class="btn btn-primary" onclick="">Atrás</button>'
 +'</div>'
  +'           </fieldset>'
           +'</form>'
@@ -146,9 +150,9 @@ var temp = new Date();
 }
 
 function verificar(){
-	if($('#montoApagar').val() == 0 || $('#montoApagar').val() > montoTotalCuenta){
+	if($('#montoApagar').val() <= 0 || $('#montoApagar').val() > montoTotalCuenta || isNaN($('#montoApagar').val()*2)){
 		$('#btnPagar').prop('disabled', true);
-		alert('El monto a pagar no puede ser cero o mayor al total.');
+		alert('El monto no puede ser menor o igual a cero o mayor al total y debe ser un número.');
 	}else{
 		$('#btnPagar').prop('disabled', false);
 	}
@@ -156,5 +160,5 @@ function verificar(){
 
 function pagar(){
 	ventas[0].idVenta;
-	manager_pagar(ventas, $('#montoApagar').val(), fechaHoy, idCliente);//cuidado aca con fechaHoy
+	manager_pagar(ventas, $('#montoApagar').val(), fechaHoy, clienteVo);//cuidado aca con fechaHoy
 }

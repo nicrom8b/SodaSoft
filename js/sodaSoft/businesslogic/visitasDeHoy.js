@@ -1,21 +1,24 @@
 function visitas_visitaDeHoy(){
+    //Se actualiza la fecha cada vez que se hace clic en visitas de hoy o se actualiza la pagina (en el index.html)
+  fechaHoy = new Date();
+  //fechaHoy.setFullYear(2013,11,3);
+
+  var diaSemanaStr = fechaUtils_getDiaSemanaString(fechaHoy.getDay());
+  var turno = fechaUtils_getTurnoByFecha(fechaHoy);
+
   manager_cambiarSeleccionItemMenu('itemMenuVisitasHoy');
 
   divContenidoElement.children().remove();
   var legend = $('<legend align="center"></legend>');
-  legend.text('Calendario de Visitas - Viernes 23/06/2013');
+  legend.text('Calendario de Visitas - '+diaSemanaStr+' '+fechaUtils_format(fechaHoy, '/,dd-mm-yyyy'));
   divContenidoElement.append(legend);
-
-  //Se actualiza la fecha cada vez que se hace clic en visitas de hoy o se actualiza la pagina (en el index.html)
-  fechaHoy = new Date();
-  fechaHoy.setFullYear(2013,11,10);
 
   //clienteDao_getAll(pintarTablaVisitasHoy, connection_error);
   console.log(fechaHoy.toString('dd-MMM-yyyy'));
-  console.log(manager_getDiaSemanaString(fechaHoy.getDay()));
-  console.log(manager_getTurnoByFecha(fechaHoy));
+  console.log(diaSemanaStr);
+  console.log(turno);
 
-  clienteDao_getByDiaTurno(manager_getDiaSemanaString(fechaHoy.getDay()), manager_getTurnoByFecha(fechaHoy), pintarTablaVisitasHoy, connection_error);
+  clienteDao_getByDiaTurno(diaSemanaStr, turno, pintarTablaVisitasHoy, connection_error);
   /*db.transaction(function(tx) {
           tx.executeSql("INSERT INTO clientes (nombre, apellido, id_barrio, saldo, estado, direccion) VALUES (?, ?, ?, ?, ?, ?)", ["Jorge", "Riera", "1", "120.00","activo", "malvinas 123"], clienteDao_getAll(pintarTablaVisitasHoy), connection_error);
         });*/
@@ -33,7 +36,7 @@ function pintarTablaVisitasHoy(tx, result){
     tr.append($('<th>Cliente</th>'));
     tr.append($('<th>Direccion</th>'));
     tr.append($('<th>Barrio</th>'));
-    tr.append($('<th>Estado</th>'));
+    tr.append($('<th>Visitado</th>'));
 
     thead.append(tr);
     table.append(thead);
@@ -46,7 +49,7 @@ function pintarTablaVisitasHoy(tx, result){
 
     if(clientes.length == 0){
       tr = $('<tr class="info"></tr>');
-        tr.append($('<td> Sin resultados</td>'));
+        tr.append($('<td colspan="5"><center><p>Sin resultados</p></center></td>'));
         tbody.append(tr);
     }else{
       var unCliente = new ClienteVO();
@@ -61,9 +64,12 @@ function pintarTablaVisitasHoy(tx, result){
               tr.append($('<td>'+unCliente.direccion+'</td>'));
               tr.append($('<td>'+unCliente.barrioVo.nombre+'</td>'));
               //tr.append($('<td>'+item['saldo']+'</td>'));
-              tr.append($('<td>'+unCliente.estadoVo.descripcion+'</td>'));
+              if(unCliente.visitado){
+                tr.append($('<td><i class="icon-large icon-ok-sign"></i></td>'));
+              }else{
+                tr.append($('<td><i class="icon-large icon-remove-sign"></i></td>'));
+              }
               
-
               tbody.append(tr);
       }
   }

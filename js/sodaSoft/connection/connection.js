@@ -24,6 +24,8 @@ var createtable_pagos_sql ='CREATE TABLE IF NOT EXISTS pagos (id_pago INTEGER PR
 
 var createtable_pruebas_sql ='CREATE TABLE IF NOT EXISTS pruebas (id_prueba INTEGER PRIMARY KEY AUTOINCREMENT, descripcion TEXT, fecha TEXT)';
 
+var createtable_visitas_sql ='CREATE TABLE IF NOT EXISTS visitas (id_visita INTEGER PRIMARY KEY AUTOINCREMENT, id_cliente INTEGER, fecha_visitado TEXT)';
+
 function connection_createTables(callbackOk, callbackError) { 
 /*	var callbackOkInactivo = createTableClientes(callbackOk, callbackError);
 	var callbackOkActivo = insertEstadosInicialesInactivo(callbackOkInactivo, callbackError);
@@ -58,6 +60,8 @@ function connection_createTables(callbackOk, callbackError) {
   ejecutar(createtable_ventas_sql);
   ejecutar(createtable_detalleVentas_sql);
   ejecutar(createtable_pagos_sql);
+
+  ejecutar(createtable_visitas_sql);
 
   ejecutar(createtable_pruebas_sql);
 

@@ -22,7 +22,8 @@ function clienteDao_getByDiaTurno(dia, turno, callbackOk, callbackError){
           tx.executeSql('select '
                              +' cli.*, '
                              +' est.id_estado as id_estado_Testado, est.descripcion as descripcion_Testado, '
-                             +' barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio '
+                             +' barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio, '
+                             +' (select vi.fecha_visitado from visitas vi where vi.id_cliente = cli.id_cliente) as fecha_visitado_Tvistas '
                         +' from '
                              +' clientes cli, estados est, barrios barr '
                         +' where '
@@ -37,10 +38,22 @@ function clienteDao_getByDiaTurno(dia, turno, callbackOk, callbackError){
                                     +' where '
                                         +' tea_cal_barr_cli.id_calendario = (select cal2.id_calendario from calendarios cal2 where cal2.dia = ? and cal2.turno = ?) '
                                 +' ) '
-                            +' ) ', [dia, turno], callbackOk, callbackError);
+                            +' ) '
+                          , [dia, turno], callbackOk, callbackError);
         });
 }
 
+/*select  cli.*, est.id_estado as id_estado_Testado, est.descripcion as descripcion_Testado,  barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio ,
+ (select vi.fecha_visitado from visitas vi where vi.id_cliente = cli.id_cliente) as fecha_visitado_Tvistas 
+
+  from  clientes cli, estados est, barrios barr  
+   where  (cli.estado = est.id_estado and cli.id_barrio = barr.id_barrio)  and  (cli.id_cliente in  ( 
+                        select  tea_cal_barr_cli.id_cliente  from calendarios_barrios_clientes tea_cal_barr_cli 
+                  where  tea_cal_barr_cli.id_calendario = (select cal2.id_calendario from calendarios cal2 where cal2.dia = 'Martes'  and cal2.turno = 'Tarde' ) 
+                                                   ) 
+                             ) 
+  */
+   
 // **********************Sqlite consuta pura >> **********************************************************
 // select  cli.*, est.id_estado as id_estado_Testado, est.descripcion as descripcion_Testado,  barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio 
 //   from  clientes cli, estados est, barrios barr   
@@ -55,7 +68,8 @@ function clienteDao_getById(idCliente, callbackOk, callbackError){
           tx.executeSql('select '
                           +' c.*, '
                           +' e.id_estado as id_estado_Testado, e.descripcion as descripcion_Testado, '
-                          +' barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio '
+                          +' barr.id_barrio as id_barrio_Tbarrio, barr.nombre as nombre_Tbarrio, barr.descripcion as descripcion_Tbarrio, '
+                          +' (select vi.fecha_visitado from visitas vi where vi.id_cliente = c.id_cliente) as fecha_visitado_Tvistas '
                         +' from '
                           +' clientes c, estados e, barrios barr '
                         +' where '

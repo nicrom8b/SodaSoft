@@ -30,8 +30,17 @@
         });
 }*/
 
+function manager_visitar(idCliente, fechaVisitado, callbackOk){
+  var fechaStr = manager_getFromatedDateYYYMMDD(fechaVisitado);
 
-function manager_pagar(ventasVo, montoRecibido, fechaPago, idCliente){
+  db.transaction(function(tx) {
+        tx.executeSql('insert into visitas (id_cliente, fecha_visitado) values (?, ?)',
+          [idCliente, fechaStr], callbackOk, connection_error);
+    });
+}
+
+function manager_pagar(ventasVo, montoRecibido, fechaPago, clienteVo){
+  var idCliente = clienteVo.idCliente;
   var fechaStr = manager_getFromatedDateYYYMMDD(fechaPago);
 
   db.transaction(function(tx) {
@@ -54,7 +63,14 @@ function manager_pagar(ventasVo, montoRecibido, fechaPago, idCliente){
               montoRecibido = saldo;
             }
           alert('Pagado con éxito!');
-          detalleCliente(idCliente);
+
+          if(clienteVo.visitado){
+             detalleCliente(idCliente);
+           }else{
+             manager_visitar(idCliente, fechaPago, detalleCliente(idCliente));
+          }
+
+          
         });
 }
 
@@ -81,7 +97,8 @@ function manager_resultToVentas(result){
   return ventas;
 }
 
-function manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaVenta){
+function manager_vender(clienteVo, sifonCantidadMonto, montoTotal, fechaVenta, callbackOk){
+  var idCliente = clienteVo.idCliente;
   var fechaStr = manager_getFromatedDateYYYMMDD(fechaVenta);
 
   db.transaction(function(tx) {
@@ -93,18 +110,19 @@ function manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaVenta){
                 [result.insertId, sifonCantidadMonto[i].id, sifonCantidadMonto[i].cantidad, parseFloat(sifonCantidadMonto[i].precio) * parseInt(sifonCantidadMonto[i].cantidad)], null, connection_error);
             };
             alert('vendido con exito!');
-            pago(idCliente);
+
+            if(clienteVo.visitado){
+              pago(idCliente);  
+            }else{
+              manager_visitar(idCliente, fechaVenta, pago(idCliente));
+            }
+            
           }, connection_error);
 
     });
-/*db.transaction(function(tx) {
-        tx.executeSql('insert into pruebas (descripcion, fecha) VALUES (?, ?)',
-          ['descrip', fechaHoyStr], function(tx2, result){
-              alert(result.insertId);
-          }, connection_error);
-    });*/
 }
 
+//TODO: Hacerlo generico para fechaUtils.js
 function manager_getFromatedDateYYYMMDD(date){
   var yyyy = date.getFullYear().toString();                                    
   var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based         
@@ -176,6 +194,8 @@ function manager_resultToClientes(result){
       
       unCliente.estadoVo = cargarEstado(item);
       unCliente.barrioVo = cargarBarrio(item);
+      
+      unCliente.visitado = item.fecha_visitado_Tvistas;
 
       clientes.push(unCliente);
   }
@@ -260,26 +280,3 @@ console.log(clientes);
 
   return clientes;
 }*/
-
-function manager_getDiaSemanaString(dia){
-  var semana=new Array(7);
-  semana[0]="Domingo";
-  semana[1]="Lunes";
-  semana[2]="Martes";
-  semana[3]="Miercoles";
-  semana[4]="Jueves";
-  semana[5]="Viernes";
-  semana[6]="Sabado";
-
-  return semana[dia];
-}
-
-function manager_getTurnoByFecha(fecha){
-  var mediodia = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate(), 12, 0, 0, 0);
-
-  if(fecha < mediodia){
-    return 'Mañana';
-  }
-
-  return 'Tarde';
-}
