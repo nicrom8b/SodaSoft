@@ -3,6 +3,7 @@ function prueba_insertarDatosIniciales(){
     prueba_insertCalendarios();
     prueba_insertCalBarrCLi();
     prueba_insertClientes();
+    prueba_insertRecorridos();
 }
 
 function prueba_insertClientes(){
@@ -186,6 +187,28 @@ function prueba_insertCalBarrCLi(){
 
         });
 
+
+}
+
+function prueba_insertRecorridos(){
+        db.transaction(function(tx) {
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [1, 2], null, connection_error);
+
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [1, 6], null, connection_error);
+
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [2, 4], null, connection_error);
+
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [2, 7], null, connection_error);
+
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [3, 8], null, connection_error);
+
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [3, 19], null, connection_error);
+
+          tx.executeSql("INSERT INTO recorridos (id_calendario, id_barrio) VALUES (?, ?)", [4, 9], null, connection_error);
+
+          
+        });
+  
 
 }
 

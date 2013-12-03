@@ -3,13 +3,8 @@ SodaSoft
 
 Aplicación para la gestión de Soderia, desarrollado para la catedra de Ingenieria del Software 2 Año 2013
 - Esta aplicacion hibrida fue analizada, diseñada y propotipada en el trayecto de la cursada
-de la materia Ingenieria del Software 1 y 2 de la carrera de Ing. Informatica de la UNJu
+de la materia Ingenieria del Software 1 y 2 de la carrera de Ing. Informatica de la UNJu.
 
-Autores:
-		Jorge J. Riera			@nigrobyte
-		Debora A. Sudañez		@Debitux
-		Diego N. Verrastro		@diegoxtr
-		Veronica Ovando			@OvandoVero
 
 
 Arqutiectura del Core de la aplicacion 
