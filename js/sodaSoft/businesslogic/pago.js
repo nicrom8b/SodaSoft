@@ -97,7 +97,7 @@ function pintarPago(ts, result){
 
 +'<div  align="center">'
 +'<button type="button" id="btnPagar" class="btn btn-primary" onclick="pagar();">'
-  +'Pagar'
+  +'Cobrar'
 +'</button>'
 +'</div>'
  +'           </fieldset>'

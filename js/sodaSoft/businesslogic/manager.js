@@ -54,7 +54,7 @@ function manager_pagar(ventasVo, montoRecibido, fechaPago, idCliente){
               montoRecibido = saldo;
             }
           alert('Pagado con éxito!');
-          pago(idCliente);
+          detalleCliente(idCliente);
         });
 }
 
@@ -105,10 +105,6 @@ function manager_vender(idCliente, sifonCantidadMonto, montoTotal, fechaVenta){
     });*/
 }
 
-function insertDetalleVenta(){
-
-}
-
 function manager_getFromatedDateYYYMMDD(date){
   var yyyy = date.getFullYear().toString();                                    
   var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based         
@@ -135,6 +131,10 @@ function manager_resultToSifones(result){
       unSifon.stock = item.stock;
       unSifon.precio = item.precio;
       unSifon.estado = item.estado;
+
+      if(item.cantidad_prestado){
+        unSifon.cantidadPrestado = item.cantidad_prestado;
+      }
 
       sifones.push(unSifon);
   }
