@@ -14,7 +14,7 @@ Esta arquitercura solo esta contemplando parte del diseño y solo el nucleo de l
 -Nota: Para el armado del proyecto definitivo necesita adicionarle la arquitectura de Android y los jar 
 correspondientes a Apache Cordova (Phonegap), como asi tambien la activiti inicial
 
-
+```
 SodaSoft.
 ├── config.xml
 ├── css
@@ -138,7 +138,7 @@ SodaSoft.
 │           ├── jasmine.js
 │           └── MIT.LICENSE
 └── spec.html
-
+```
 
 Pruebas de Unitaria del modulo Visita de Hoy
 =============================================
